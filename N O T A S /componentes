@@ -1,0 +1,30 @@
+Componentes:
+Unidad básica de desarrollo.
+Son como átomos.
+Son BLOQUES DE CONSTRUCCIÓN, que al juntarlos tendremos una figura completa.
+
+COMPONENTE VS. ELEMENTO:
+Un elemento es un objeto como como un componente es una clase.
+Si el elemento fuera una casa, el componente seria el PLANO para hacer la casa.
+El elemento sale de la clase, sale del COMPONENTE.
+
+Como los identificamos:
+ELEMENTOS QUE SE REPITEN,
+Por ejemplo, elementos en una listado elementos que comparten un aspecto VISUAL y/o su FUNCIONALIDAD.
+
+Se COMPORTARÁN o se verán de la misma manera, pero eran diferentes.
+
+ELEMENTOS CON FUNCION MUY ESPECIFICA, nos ayudan para encapsular lógica, permiten juntar muchos comportamientos y aspectos visuales en un solo lugar.
+
+UNIDAD BASICA DE DESARROLLO.
+
+Los componentes tienen ida, nacen crecen y desaparecen :O 
+ 
+CICLO DE VIDA: 
+MONTAJE; cuando en el teatro esta La Luz baja pero no vemos bien los elementos detrás del telón , son solo sombras,
+Primer paso de u. Ciclo de vida de un componente.
+
+Ahora vemos que esta el telón, y hay un restaurante, el personaje pide un ramen, este se va y traer l comida, se lo come,  muchas cosas se mantuvieron en escena, unas cosas cambiaron otras no,  los que si cambiaron pasaron por una ACTUALIZACIÓN, cuando se actualizan los componentes se ejecuta el reader, después nos manda una señal de confirmación, COMPONENTDIDUPDATE(), este es un buen momento para sugerir cambios, como ordenar una bebida,
+Al terminar, paga y se va, se cierra el telón. 
+
+componentWillUnmount(), Elimina el código del DOM.
