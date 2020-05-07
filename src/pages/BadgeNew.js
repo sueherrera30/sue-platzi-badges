@@ -1,10 +1,10 @@
 import React from 'react';
 
 import './styles/BadgeNew.css';
-// import header from '../images/badge-header.svg';
 import header from '../images/platziconf-logo.svg';
 import Badge from '../components/Badge';
 import BadgeForm from '../components/BadgeForm';
+import api from '../api';
 
 class BadgeNew extends React.Component {
   state = {
@@ -24,6 +24,27 @@ class BadgeNew extends React.Component {
         [e.target.name]: e.target.value,
       },
     });
+  };
+  handleSubmit = async e => {
+    //detenemos evento:
+    e.preventDefault();
+    this.setState({
+      loading: true,
+      error: null,
+    })
+    try {
+      // pasaremos aqui los datos del nuevo badge
+      await api.badges.create(this.state.form);
+      this.setState({
+        loading: false,
+        // aqui no usaremos datos, no queremos consumir ninguna info.
+      })
+    } catch (error) {
+      this.setState({
+        loading: false,
+        error: error,
+      })
+    }
   };
 
   render() {
@@ -51,6 +72,7 @@ class BadgeNew extends React.Component {
               <BadgeForm
                 onChange={this.handleChange}
                 formValues={this.state.form}
+                onSubmit={this.handleSubmit}
               />
             </div>
           </div>

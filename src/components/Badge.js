@@ -4,6 +4,7 @@ import './styles/Badge.css';
 // empaqueta archivos
 import confLogo from '../images/badge-header.svg';
 // import { Z_ASCII } from 'zlib';
+import Gravatar from '../components/Gravatar';
 
 class Badge extends React.Component {
   // todos los componentes requieren de un metodo obligatorio,
@@ -17,11 +18,11 @@ class Badge extends React.Component {
         <img src={confLogo} alt="Logo de la conferencia" />
       </div>
       <div className="Badge__section-name">
-        <img
+         <Gravatar
           className="Badge__avatar"
-          src={this.props.avatarUrl}
+          email={this.props.email}
           alt="Avatar"
-        />
+         />
         <h1>
           {this.props.firstName} <br /> {this.props.lastName}
         </h1>
