@@ -8,6 +8,8 @@ import api from '../api';
 
 class BadgeNew extends React.Component {
   state = {
+    loading: false,
+    error: null,
     form: {
       firstName: '',
       lastName: '',
@@ -38,7 +40,11 @@ class BadgeNew extends React.Component {
       this.setState({
         loading: false,
         // aqui no usaremos datos, no queremos consumir ninguna info.
+        // en caso de qeu haya exito, queremos regresar a la lista de badges, 
+        //atravñes de un prop que las paginas reciben, através de react router.
+        // history - para redirigir al usuario a badges.
       })
+      this.props.history.push('/badges');
     } catch (error) {
       this.setState({
         loading: false,
@@ -48,6 +54,9 @@ class BadgeNew extends React.Component {
   };
 
   render() {
+    if(this.state.loading) {
+      return (<p>loading baby</p>)
+    }
     return (
       <React.Fragment>
         <div className="BadgeNew__hero">
@@ -73,6 +82,7 @@ class BadgeNew extends React.Component {
                 onChange={this.handleChange}
                 formValues={this.state.form}
                 onSubmit={this.handleSubmit}
+                error={this.state.error}
               />
             </div>
           </div>
