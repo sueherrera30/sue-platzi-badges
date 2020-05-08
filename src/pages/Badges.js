@@ -39,7 +39,7 @@ class Badges extends React.Component {
 
   const 
   render() {
-    if(this.state.loading === true) {
+    if(this.state.loading === true && !this.state.data) {
       return 'Loading baby...wait a minute'
     }
     if(this.state.error) {

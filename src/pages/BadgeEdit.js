@@ -21,6 +21,9 @@ class BadgeEdit extends React.Component {
 
   componentDidMount() {
     this.fetchData();
+    // cada 5seg la info se volverá a cargar , hara toso el proceso. cargar,pedira datos.
+   // ojo cada 5 segundos se actualiza la pagina y estropea flujo.
+    setInterval(this.fetchData, 5000)
   }
 
   fetchData = async e => {
