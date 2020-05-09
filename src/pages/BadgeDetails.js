@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Modal from '../components/Modal';
 
 import './styles/BadgeDetails.css';
 import confLogo from '../images/platziconf-logo.svg';
@@ -48,7 +49,10 @@ function BadgeDetails(props) {
             </div>
 
             <div>
-              <button className="btn btn-danger">Delete</button>
+              <button className="btn btn-danger">
+                Delete    
+              </button>
+              <Modal/>
             </div>
           </div>
         </div>
