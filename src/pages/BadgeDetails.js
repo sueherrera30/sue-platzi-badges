@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DeleteBadgeModal from '../components/deleteBadgeModal';
 
@@ -7,6 +7,7 @@ import confLogo from '../images/platziconf-logo.svg';
 import Badge from '../components/Badge';
 
 function BadgeDetails(props) {
+  const [count, setCount] = (0);
   const badge = props.badge;
   return (
     <div>
@@ -40,6 +41,10 @@ function BadgeDetails(props) {
           <h2>Actions</h2>
           <div>
             <div>
+              <button onClick={() =>{setCount(count + 1)}} className="btn btn-primary">
+                increase count: {count}
+                
+              </button>
               <Link
                 className="btn btn-primary mb-4"
                 to={`/badges/${badge.id}/edit`}
