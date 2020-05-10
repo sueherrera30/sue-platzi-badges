@@ -24,27 +24,64 @@ class BadgesListItem extends React.Component {
     );
   }
 }
-
+  // para poder filtrar, usamos custom hook:
+  // valor incial es la lsita completa de los badges
+   // en corchetes: si alguno de estoso dos datos cambia, se debe volver a calcular,
+function useSearchBadges(badges) {
+  const [ query, setQuery ] = React.useState('');
+  const [ filteredBadgers, setfilterBadges ] = React.useState(badges)
+  React.useMemo(() => {
+    const result = badges.filter(badge => {
+      return badge.firstName.toLowerCase().includes(query.toLowerCase())
+    })
+    setfilterBadges(result)
+  }, [badges,query]);
+  return { query, setQuery,filteredBadgers }
+}
 function BadgesList(props) {
   const badges = props.badges;
-    if (badges.length === 0) {
+  const { query, setQuery, filteredBadgers } = useSearchBadges(badges);
+  // si filtramos y no encuentra valor, llegamos al valor 0, entramos 
+  // a este caso, dosopciones:
+  // hacer una copia del input  y pegarlo arriba
+    if (filteredBadgers.length === 0) {
       return (
-        <div>
-          <h3>No badges were found</h3>
-          <Link className="btn btn-primary" to="/badges/new">
-            Create new badge
-          </Link>
-        </div>
+          <div>
+            <div className="form-group">
+            <label>please,filter badger platzi lover </label>
+            <input
+              type='text'
+              className="form-control"
+              // lo que sea que este en el estado del query, 
+              //se va a desplegar en el value
+              value={query}
+              onChange={e => {
+              setQuery(e.target.value)
+              }}
+            />
+            </div>
+            <h3>No badges were found</h3>
+            <Link className="btn btn-primary" to="/badges/new">
+              Create new badge
+            </Link>
+          </div>
       );
     }
     return (
       <div className="BadgesList">
         <div className="form-group">
-          <label>please,filter badger platzi lover </label>
-          <input className="form-control"/>
-        </div>
+        <label>Filter Badges</label>
+        <input
+          type="text"
+          className="form-control"
+          value={query}
+          onChange={e => {
+            setQuery(e.target.value);
+          }}
+        />
+      </div>
         <ul className="list-unstyled">
-          {badges.map(badge => {
+          {filteredBadgers.map(badge => {
             return (
               <li key={badge.id}>
                 <Link 
