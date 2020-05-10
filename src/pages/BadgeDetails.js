@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DeleteBadgeModal from '../components/deleteBadgeModal';
-
 import './styles/BadgeDetails.css';
 import confLogo from '../images/platziconf-logo.svg';
 import Badge from '../components/Badge';
 
+function useIncreaseCount(max) {
+  const [count, setCount] = React.useState(0);
+  if( count > max) {
+    setCount(0)
+  }
+  return [count, setCount];
+}
 function BadgeDetails(props) {
-  const [count, setCount] = (0);
+  const [count, setCount] = useIncreaseCount(7);
   const badge = props.badge;
   return (
     <div>

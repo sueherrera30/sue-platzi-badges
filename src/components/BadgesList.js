@@ -25,9 +25,9 @@ class BadgesListItem extends React.Component {
   }
 }
 
-class BadgesList extends React.Component {
-  render() {
-    if (this.props.badges.length === 0) {
+function BadgesList(props) {
+  const badges = props.badges;
+    if (badges.length === 0) {
       return (
         <div>
           <h3>No badges were found</h3>
@@ -37,15 +37,18 @@ class BadgesList extends React.Component {
         </div>
       );
     }
-
     return (
       <div className="BadgesList">
+        <div className="form-group">
+          <label>please,filter badger platzi lover </label>
+          <input className="form-control"/>
+        </div>
         <ul className="list-unstyled">
-          {this.props.badges.map(badge => {
+          {badges.map(badge => {
             return (
               <li key={badge.id}>
                 <Link 
-                  to={`/badges/${badge.id}`}
+                  to={`/badges/${badge.id}/edit`}
                   className="text-reset text-decoration-none"
                   >
                   <BadgesListItem badge={badge} />
@@ -56,7 +59,6 @@ class BadgesList extends React.Component {
         </ul>
       </div>
     );
-  }
 }
 
 export default BadgesList;
