@@ -49,10 +49,10 @@ function BadgeDetails(props) {
             </div>
 
             <div>
-              <button className="btn btn-danger">
+              <button className="btn btn-danger" onClick={props.onOpenModal}>
                 Delete    
               </button>
-              <Modal/>
+              <Modal isOpen={props.modalIsOpen} onClose={props.onCloseModal}>Textito de prueba en modal </Modal>
             </div>
           </div>
         </div>
