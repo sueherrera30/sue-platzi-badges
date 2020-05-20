@@ -1,18 +1,21 @@
 const path = require('path')
+// de manera nativa html no trae el enlace en el index de dll,
+//  toma arcivo de public entonces usaremos otros plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 module.exports = {
   entry: {
-    home: path.resolve(__dirname,'src/js/index.js'),
-    contact: path.resolve(__dirname,'src/js/contact.js'),
+    app: path.resolve(__dirname,'src/index.js'),
   },
-  mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].js',
-    publicPath: 'dist/',
+    // cdn de donde partiran mis rutas
+    // correr proyecto con npm run server
+    publicPath: 'http://localhost:3001/',
     chunkFilename: 'js/[id].[chunkhash].js'
   },
   module: {
@@ -28,43 +31,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          'postcss-loader',
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
           'css-loader',
-          'less-loader',
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'css-loader',
-          'sass-loader',
-        ]
-      },
-      {
-        test: /\.styl$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'css-loader',
-          'stylus-loader',
         ]
       },
       {
@@ -72,7 +39,7 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            limit: 90000,
+            limit: 1000,
           }
         }
       },
@@ -83,13 +50,21 @@ module.exports = {
       filename: 'css/[name].css',
       chunkFilename: 'css/[id].css'
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'webpack-dev-server',
-      template: path.resolve(__dirname, 'index.html')
+      template: path.resolve(__dirname, 'public/index.html')
     }),
     new webpack.DllReferencePlugin({
       manifest: require('./modules-manifest.json')
+    }),
+    new AddAssetHtmlPlugin({
+      //que archivo quiero importar
+      // vamos a buscar a dist 
+      // revisar output de dll
+      filepath: path.resolve(__dirname, 'dist/js/*.dll.js'),
+      //donde lo quiero poner 
+      outputPath: 'js',
+      // desde donde lo quiero leer 
+      publicPath: 'http://localhost:3001/js',
     })
   ],
 }

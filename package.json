@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "server": "json-server --port 3001 --watch server/db.json",
+    "server": "json-server --port 3001 --watch server/db.json --static ./dist",
     "seed": "node server/seed.js",
     "build:dev": "webpack-dev-server --config ./webpack.dev.config.js",
-    "dev": "npm-run-all -p build:dev server"
+    "dev": "npm-run-all -p build:dev server", 
+    "build:dll": "webpack --config ./webpack.dll.config.js --mode production",
+    "build": "webpack --config ./webpack.config.js --mode production"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.5",
